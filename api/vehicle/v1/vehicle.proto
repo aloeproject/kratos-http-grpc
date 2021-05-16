@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package api.vehicle.v1;
+
+option go_package = "kratos-http-grpc/api/vehicle/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.vehicle.v1";
+
+import "google/api/annotations.proto";
+
+service Vehicle {
+    rpc GetVehicle (GetVehicleRequest) returns (GetVehicleReply){
+     option (google.api.http) = {
+          get: "/v1/vehicle/get/{id}"
+          body: "*"
+        };
+    }
+}
+
+
+message GetVehicleRequest {
+    int64 id = 1;
+}
+message GetVehicleReply {
+    string name = 1;
+}
