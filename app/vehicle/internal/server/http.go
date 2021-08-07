@@ -11,6 +11,7 @@ import (
 	v1 "kratos-http-grpc/api/vehicle/v1"
 	"kratos-http-grpc/app/vehicle/internal/conf"
 	"kratos-http-grpc/app/vehicle/internal/service"
+	middleware2 "kratos-http-grpc/middleware"
 )
 
 // NewHTTPServer new a HTTP server.
@@ -28,6 +29,7 @@ func NewHTTPServer(c *conf.Server, tracer trace.TracerProvider, vehicle *service
 	srv := http.NewServer(opts...)
 	m := http.Middleware(
 		middleware.Chain(
+			middleware2.CheckHeader(),
 			tracing.Server(tracing.WithTracerProvider(tracer)),
 			recovery.Recovery(),
 			logging.Server(logger),

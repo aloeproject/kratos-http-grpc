@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package api.myuser;
+option go_package="kratos-http-grpc/api/myuser;myuser";
+
+message GetUserReq {
+  int64 id = 1;
+}
+
+message GetUserRes {
+  int64 id = 1;
+  string name = 2;
+}
+
+service MyUser {
+  rpc GetUser(GetUserReq) returns (GetUserRes);
+}
